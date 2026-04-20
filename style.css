@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  background: #0f172a;
+  color: white;
+  font-family: Arial;
+}
+
+.container {
+  text-align: center;
+  padding: 40px;
+}
+
+button {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  border: none;
+  padding: 12px 20px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#dashboard {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+}
