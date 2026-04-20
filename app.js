@@ -1,78 +1,48 @@
-import {
-  getDoc,
-  updateDoc,
-  collection,
-  addDoc,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+let balance = 1000;
 
-let currentUser = null;
-
-// LOGIN UPDATE
-window.login = async function () {
-  const provider = new GoogleAuthProvider();
-  const result = await signInWithPopup(auth, provider);
-
-  const user = result.user;
-  currentUser = user;
-
-  document.getElementById("dashboard").style.display = "block";
-  document.getElementById("userInfo").innerText = user.email;
-
-  const userRef = doc(db, "users", user.uid);
-  const userSnap = await getDoc(userRef);
-
-  if (!userSnap.exists()) {
-    await setDoc(userRef, {
-      email: user.email,
-      balance: 500 // TEST balance
-    });
-  }
-
-  loadBalance();
-};
-
-// LOAD BALANCE
-async function loadBalance() {
-  const userRef = doc(db, "users", currentUser.uid);
-  const data = await getDoc(userRef);
-
-  document.getElementById("balance").innerText = data.data().balance;
+function updateBalance() {
+  document.getElementById("balance").innerText = balance;
 }
 
-// PLACE ORDER
-window.placeOrder = async function () {
-  const servicePrice = document.getElementById("service").value;
+// ORDER SYSTEM
+function placeOrder() {
+  const service = document.getElementById("service").value;
   const qty = document.getElementById("qty").value;
   const link = document.getElementById("link").value;
 
-  const cost = (qty / 1000) * servicePrice;
+  if (!qty || !link) {
+    alert("Fill all fields");
+    return;
+  }
 
-  const userRef = doc(db, "users", currentUser.uid);
-  const userSnap = await getDoc(userRef);
-
-  let balance = userSnap.data().balance;
+  const cost = (qty / 1000) * service;
 
   if (balance < cost) {
     alert("Not enough balance");
     return;
   }
 
-  // Deduct balance
-  await updateDoc(userRef, {
-    balance: balance - cost
-  });
+  balance -= cost;
+  updateBalance();
 
-  // Save order
-  await addDoc(collection(db, "orders"), {
-    userId: currentUser.uid,
-    service: servicePrice,
-    link: link,
-    qty: qty,
-    status: "Pending"
-  });
+  const li = document.createElement("li");
+  li.innerText = `Order: ${qty} - Status: Pending`;
 
-  alert("Order Placed!");
+  document.getElementById("orders").appendChild(li);
+}
 
-  loadBalance();
-};
+// QR SYSTEM
+function generateQR() {
+  const amount = document.getElementById("amount").value;
+
+  if (!amount) {
+    alert("Enter amount");
+    return;
+  }
+
+  const upi = `upi://pay?pa=yourupi@bank&pn=GrowUpSMM&am=${amount}&cu=INR`;
+
+  QRCode.toCanvas(document.getElementById("qr"), upi);
+}
+
+updateBalance();
