@@ -6,22 +6,29 @@ body {
 }
 
 .container {
+  padding: 20px;
   text-align: center;
-  padding: 40px;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 15px 0;
 }
 
 button {
   background: linear-gradient(45deg, #3b82f6, #8b5cf6);
   border: none;
-  padding: 12px 20px;
+  padding: 12px;
   color: white;
   border-radius: 10px;
-  cursor: pointer;
+  margin: 10px;
 }
 
-#dashboard {
-  margin-top: 20px;
-  padding: 20px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 15px;
+input, select {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  border: none;
 }
