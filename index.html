@@ -1,26 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Grow Up SMM Panel</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div id="dashboard" style="display:none;">
 
-<div class="container">
+  <h2>Dashboard</h2>
 
-  <h1>Grow Up SMM Panel 🚀</h1>
+  <p id="userInfo"></p>
+  <h3>Balance: ₹<span id="balance">0</span></h3>
 
-  <button onclick="login()">Login with Google</button>
+  <hr>
 
-  <div id="dashboard" style="display:none;">
-    <h2>Dashboard</h2>
-    <p id="userInfo"></p>
-  </div>
+  <h3>New Order</h3>
+
+  <select id="service">
+    <option value="100">Instagram Followers - ₹100 / 1000</option>
+    <option value="50">YouTube Views - ₹50 / 1000</option>
+  </select>
+
+  <input type="text" id="link" placeholder="Enter Link">
+  <input type="number" id="qty" placeholder="Quantity">
+
+  <button onclick="placeOrder()">Place Order</button>
 
 </div>
-
-<script type="module" src="app.js"></script>
-
-</body>
-</html>
