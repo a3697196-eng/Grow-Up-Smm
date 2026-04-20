@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Grow Up SMM Panel</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Grow Up SMM Panel</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -11,25 +11,32 @@
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <h2>🚀 SMM</h2>
+    <h2>🚀 GrowUp</h2>
 
-    <button onclick="showPage('dashboard')">Dashboard</button>
-    <button onclick="showPage('order')">New Order</button>
-    <button onclick="showPage('funds')">Add Funds</button>
-    <button onclick="showPage('orders')">Orders</button>
+    <button onclick="showPage('dashboard')">📊 Dashboard</button>
+    <button onclick="showPage('order')">🛒 New Order</button>
+    <button onclick="showPage('funds')">💰 Add Funds</button>
+    <button onclick="showPage('orders')">📦 Orders</button>
   </div>
 
   <!-- MAIN -->
   <div class="main">
 
-    <!-- DASHBOARD -->
-    <div id="dashboard" class="page">
-      <h2>Dashboard</h2>
-      <h3>Balance: ₹<span id="balance">1000</span></h3>
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <h2>Grow Up SMM Panel</h2>
     </div>
 
-    <!-- NEW ORDER -->
-    <div id="order" class="page" style="display:none;">
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page">
+      <div class="cards">
+        <div class="card">Balance<br>₹<span id="balance">0</span></div>
+        <div class="card">Total Orders<br><span id="totalOrders">0</span></div>
+      </div>
+    </div>
+
+    <!-- ORDER -->
+    <div id="order" class="page">
       <h2>New Order</h2>
 
       <select id="service">
@@ -43,8 +50,8 @@
       <button onclick="placeOrder()">Place Order</button>
     </div>
 
-    <!-- ADD FUNDS -->
-    <div id="funds" class="page" style="display:none;">
+    <!-- FUNDS -->
+    <div id="funds" class="page">
       <h2>Add Funds</h2>
 
       <input type="number" id="amount" placeholder="Enter Amount">
@@ -54,9 +61,20 @@
     </div>
 
     <!-- ORDERS -->
-    <div id="orders" class="page" style="display:none;">
+    <div id="orders" class="page">
       <h2>Orders</h2>
-      <ul id="ordersList"></ul>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Service</th>
+            <th>Qty</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTable"></tbody>
+      </table>
     </div>
 
   </div>
