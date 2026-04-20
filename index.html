@@ -7,40 +7,58 @@
 </head>
 <body>
 
-<div class="container">
+<div class="layout">
 
-  <h1>🚀 Grow Up SMM Panel</h1>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>🚀 SMM</h2>
 
-  <div class="card">
-    <h2>Balance: ₹<span id="balance">1000</span></h2>
+    <button onclick="showPage('dashboard')">Dashboard</button>
+    <button onclick="showPage('order')">New Order</button>
+    <button onclick="showPage('funds')">Add Funds</button>
+    <button onclick="showPage('orders')">Orders</button>
   </div>
 
-  <div class="card">
-    <h2>New Order</h2>
+  <!-- MAIN -->
+  <div class="main">
 
-    <select id="service">
-      <option value="100">Instagram Followers - ₹100/1000</option>
-      <option value="50">YouTube Views - ₹50/1000</option>
-    </select>
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page">
+      <h2>Dashboard</h2>
+      <h3>Balance: ₹<span id="balance">1000</span></h3>
+    </div>
 
-    <input type="text" id="link" placeholder="Enter Link">
-    <input type="number" id="qty" placeholder="Quantity">
+    <!-- NEW ORDER -->
+    <div id="order" class="page" style="display:none;">
+      <h2>New Order</h2>
 
-    <button onclick="placeOrder()">Place Order</button>
-  </div>
+      <select id="service">
+        <option value="100">Instagram Followers - ₹100/1000</option>
+        <option value="50">YouTube Views - ₹50/1000</option>
+      </select>
 
-  <div class="card">
-    <h2>Add Funds</h2>
+      <input type="text" id="link" placeholder="Enter Link">
+      <input type="number" id="qty" placeholder="Quantity">
 
-    <input type="number" id="amount" placeholder="Enter Amount">
-    <button onclick="generateQR()">Generate QR</button>
+      <button onclick="placeOrder()">Place Order</button>
+    </div>
 
-    <canvas id="qr"></canvas>
-  </div>
+    <!-- ADD FUNDS -->
+    <div id="funds" class="page" style="display:none;">
+      <h2>Add Funds</h2>
 
-  <div class="card">
-    <h2>Orders</h2>
-    <ul id="orders"></ul>
+      <input type="number" id="amount" placeholder="Enter Amount">
+      <button onclick="generateQR()">Generate QR</button>
+
+      <canvas id="qr"></canvas>
+    </div>
+
+    <!-- ORDERS -->
+    <div id="orders" class="page" style="display:none;">
+      <h2>Orders</h2>
+      <ul id="ordersList"></ul>
+    </div>
+
   </div>
 
 </div>
