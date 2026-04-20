@@ -9,7 +9,6 @@ body {
   display: flex;
 }
 
-/* SIDEBAR */
 .sidebar {
   width: 220px;
   background: #020617;
@@ -18,17 +17,15 @@ body {
 }
 
 .sidebar button {
-  display: block;
   width: 100%;
+  padding: 10px;
   margin: 10px 0;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
   background: #1e293b;
+  border: none;
   color: white;
+  border-radius: 8px;
 }
 
-/* MAIN */
 .main {
   flex: 1;
 }
@@ -38,7 +35,6 @@ body {
   padding: 15px;
 }
 
-/* CARDS */
 .cards {
   display: flex;
   gap: 20px;
@@ -53,12 +49,11 @@ body {
   text-align: center;
 }
 
-/* PAGE */
 .page {
   padding: 20px;
+  display: none;
 }
 
-/* FORM */
 input, select {
   padding: 10px;
   margin: 5px;
@@ -74,10 +69,8 @@ button {
   color: white;
 }
 
-/* TABLE */
 table {
   width: 100%;
-  border-collapse: collapse;
 }
 
 th, td {
