@@ -1,9 +1,52 @@
-<hr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grow Up SMM Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<h3>Add Funds</h3>
+<div class="container">
 
-<input type="number" id="fundAmount" placeholder="Enter Amount">
-<button onclick="addFunds()">Generate QR</button>
+  <h1>🚀 Grow Up SMM Panel</h1>
 
-<canvas id="qr"></canvas>
-<p id="paymentStatus"></p>
+  <div class="card">
+    <h2>Balance: ₹<span id="balance">1000</span></h2>
+  </div>
+
+  <div class="card">
+    <h2>New Order</h2>
+
+    <select id="service">
+      <option value="100">Instagram Followers - ₹100/1000</option>
+      <option value="50">YouTube Views - ₹50/1000</option>
+    </select>
+
+    <input type="text" id="link" placeholder="Enter Link">
+    <input type="number" id="qty" placeholder="Quantity">
+
+    <button onclick="placeOrder()">Place Order</button>
+  </div>
+
+  <div class="card">
+    <h2>Add Funds</h2>
+
+    <input type="number" id="amount" placeholder="Enter Amount">
+    <button onclick="generateQR()">Generate QR</button>
+
+    <canvas id="qr"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>Orders</h2>
+    <ul id="orders"></ul>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
