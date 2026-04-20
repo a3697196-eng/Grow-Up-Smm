@@ -1,37 +1,78 @@
-import { auth, db } from "./firebase.js";
-
 import {
-  GoogleAuthProvider,
-  signInWithPopup
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-import {
-  doc,
-  setDoc
+  getDoc,
+  updateDoc,
+  collection,
+  addDoc,
+  doc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// LOGIN
+let currentUser = null;
+
+// LOGIN UPDATE
 window.login = async function () {
-  try {
-    const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
+  const provider = new GoogleAuthProvider();
+  const result = await signInWithPopup(auth, provider);
 
-    const user = result.user;
+  const user = result.user;
+  currentUser = user;
 
-    // Show dashboard
-    document.getElementById("dashboard").style.display = "block";
+  document.getElementById("dashboard").style.display = "block";
+  document.getElementById("userInfo").innerText = user.email;
 
-    document.getElementById("userInfo").innerText =
-      "Welcome: " + user.email;
+  const userRef = doc(db, "users", user.uid);
+  const userSnap = await getDoc(userRef);
 
-    // Save user
-    await setDoc(doc(db, "users", user.uid), {
+  if (!userSnap.exists()) {
+    await setDoc(userRef, {
       email: user.email,
-      balance: 0
+      balance: 500 // TEST balance
     });
-
-  } catch (err) {
-    alert("Login Failed");
-    console.log(err);
   }
+
+  loadBalance();
+};
+
+// LOAD BALANCE
+async function loadBalance() {
+  const userRef = doc(db, "users", currentUser.uid);
+  const data = await getDoc(userRef);
+
+  document.getElementById("balance").innerText = data.data().balance;
+}
+
+// PLACE ORDER
+window.placeOrder = async function () {
+  const servicePrice = document.getElementById("service").value;
+  const qty = document.getElementById("qty").value;
+  const link = document.getElementById("link").value;
+
+  const cost = (qty / 1000) * servicePrice;
+
+  const userRef = doc(db, "users", currentUser.uid);
+  const userSnap = await getDoc(userRef);
+
+  let balance = userSnap.data().balance;
+
+  if (balance < cost) {
+    alert("Not enough balance");
+    return;
+  }
+
+  // Deduct balance
+  await updateDoc(userRef, {
+    balance: balance - cost
+  });
+
+  // Save order
+  await addDoc(collection(db, "orders"), {
+    userId: currentUser.uid,
+    service: servicePrice,
+    link: link,
+    qty: qty,
+    status: "Pending"
+  });
+
+  alert("Order Placed!");
+
+  loadBalance();
 };
